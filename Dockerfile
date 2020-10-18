@@ -1,6 +1,6 @@
-FROM garrettboast/lua
+FROM garrettboast/lua:v3.12
 MAINTAINER garrett@garrettboast.com
-ENV VERSION=0.9.12
+ENV VERSION=0.11.7
 
 ENV CONFIG_FLAGS=""
 ENV PGP_KEY=32A9EDDE3609931EB98CEAC315907E8E7BDD6BFE
@@ -19,9 +19,11 @@ RUN apk add --no-cache curl \
 		lua-sec \
 		lua-filesystem \
 		lua-socket \
+		lua-bitop \
 		make \
 		openssl \
 		openssl-dev \
+		linux-headers \
 	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys ${PGP_KEY} \
 	&& echo "${PGP_KEY}:4:" | gpg --import-ownertrust \
 	&& curl -sSLO https://prosody.im/downloads/source/prosody-${VERSION}.tar.gz \
